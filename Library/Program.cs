@@ -1,4 +1,7 @@
 
+using Library.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace Library
 {
     public class Program
@@ -13,6 +16,10 @@ namespace Library
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddDbContext<LibraryDbContext>(options =>
+            {
+                options.UseSqlite(builder.Configuration.GetConnectionString("DefConnString"));
+            });
 
             var app = builder.Build();
 
